@@ -196,7 +196,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-exec_always --no-startup-id xrandr --dpi 200
+#resolution
+exec_always --no-startup-id xrandr --dpi 192
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -309,3 +310,6 @@ exec_always --no-startup-id compton -b --backend glx --vsync opengl-swc --shadow
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+
+#Added restart because borders were not showing properly
+exec --no-startup-id i3 restart
