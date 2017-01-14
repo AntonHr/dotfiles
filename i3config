@@ -197,7 +197,6 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 #resolution
-#also had to add "Xft.dpi: 192" to ~/.XResources to fix the scaling issues 
 exec_always --no-startup-id xrandr --dpi 192
 
 # resize window (you can also use the mouse for that)
@@ -307,10 +306,26 @@ exec_always --no-startup-id compton -b --backend glx --vsync opengl-swc --shadow
 #exec_always --no-startup-id compton -b
 #--config ~/.config/i3/compton.conf -b
 
-#exec --no-startup-id i3-msg 'workspace $workspace10; exec spotify --force-device-scale-factor=2'
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+
+#Launch whatsapp and messenger on workspace 8 on startup
+assign [class="Google-chrome" instance="www.messenger.com"] $workspace8
+for_window [class="Google-chrome" instance="www.messenger.com"] floating disabled
+assign [class="Google-chrome" instance="web.whatsapp.com"] $workspace8
+for_window [class="Google-chrome" instance="web.whatsapp.com"] floating disabled
+exec --no-startup-id google-chrome-stable --app=https://web.whatsapp.com/
+exec --no-startup-id google-chrome-stable --app=https://www.messenger.com/
+
+#Launch thunderbird and gmail and spotify
+assign [class="Google-chrome" instance="www.gmail.com"] $workspace9
+for_window [class="Google-chrome" instance="www.gmail.com"] floating disabled
+assign [class="Thunderbird"] $workspace9
+for_window [class="Spotify"] move to workspace $workspace10
+exec --no-startup-id thunderbird
+exec --no-startup-id google-chrome-stable --app=https://www.gmail.com
+exec --no-startup-id spotify
 
 #Added restart because borders were not showing properly
 exec --no-startup-id i3 restart
