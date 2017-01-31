@@ -246,8 +246,10 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 bar {
     #    status_command i3status
       position top
+      mode dock
       status_command conky -c ~/.conkyrc
-        font pango:System San Francisco Display 11
+       # font pango:System San Francisco Display 11
+        strip_workspace_numbers no
 #      status_command i3blocks -c /home/anton/.config/i3/i3blocks.conf
       colors {
   background $arc-dark-color
@@ -329,3 +331,7 @@ exec --no-startup-id spotify
 
 #Added restart because borders were not showing properly
 exec --no-startup-id i3 restart
+
+#Execute lock script on suspend and hibernate
+exec --no-startup-id xss-lock -- ~/i3lock-extra.sh -s -p -o ~/Pictures/Icons/lock.png
+
